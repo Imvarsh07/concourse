@@ -1,6 +1,6 @@
 FROM ubuntu
 WORKDIR /opt
 RUN mkdir aqfer/ 
-COPY test-binary aqfer/ 
-RUN chmod +x aqfer/test-binary
-CMD ["/bin/bash", "aqfer/test-binary"]
+COPY addition.sh aqfer/ 
+RUN chmod +x aqfer/addition.sh
+CMD ["/bin/bash", "aqfer/addition.sh"]
