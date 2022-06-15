@@ -14,10 +14,10 @@ resources:
 - name: image-version 
   source:
     access_key_id: ((concourse-aws-access-key-id))
-    bucket: result-bucket
+    bucket: com.aqfer.preprod.tmp
     driver: s3
     initial_version: 1.0.0
-    key: tst/version 
+    key: tst/version  
     region_name: us-west-2
     secret_access_key: ((concourse-aws-secret-access-key))
   type: semver 
@@ -28,6 +28,7 @@ jobs:
       params: {bump: minor}
     - put: image-version
       params: {file: image-version/version}
+    
     - get: concourse-repo
     - task: create-build-atrifacts
       config:
@@ -51,14 +52,15 @@ jobs:
                   cd ${WD}/concourse-repo/golang
                   go build -o hello
                   cp hello ${WD}/artifacts/
-                  echo "golang-hello" > ${WD}/tags/version
+                  
     - put: dest-registry
       inputs: 
       - artifacts
       - tags
       params:
         build: artifacts
-        tag_file: tags/version
+        tag_file: image-version/version
+        tag_prefix: golang-hello
       
 
                   
