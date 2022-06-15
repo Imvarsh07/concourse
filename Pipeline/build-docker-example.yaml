@@ -25,8 +25,12 @@ jobs:
 - name: build-hello-world
   plan:
     - get: image-version
-        params:
-          bump: minor
+      params:
+        bump: minor
+    - task: a-thing-that-needs-a-version
+      params:
+      file: image-version/version
+    - put: image-version
     - get: concourse-repo
     - task: create-build-atrifacts
       config:
