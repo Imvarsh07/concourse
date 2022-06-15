@@ -27,7 +27,7 @@ jobs:
     - get: image-version
       params:
         bump: minor
-    - task: a-thing-that-needs-a-version
+   # - task: a-thing-that-needs-a-version
       params:
       file: image-version/version
     - put: image-version
