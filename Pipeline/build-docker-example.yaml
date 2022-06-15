@@ -11,9 +11,22 @@ resources:
     aws_secret_access_key: ((concourse-aws-secret-access-key))
     repository: 965106989073.dkr.ecr.us-west-2.amazonaws.com/adl-uncertified
   type: docker-image
+- name: image-version 
+  source:
+    access_key_id: ((concourse-aws-access-key-id))
+    bucket: com.aqfer.dev.result-bucket
+    driver: s3
+    initial_version: 1.0.0
+    key: tst/version 
+    region_name: us-west-2
+    secret_access_key: ((concourse-aws-secret-access-key))
+  type: semver 
 jobs:
 - name: build-hello-world
   plan:
+    - get: image-version
+        params:
+          bump: minor
     - get: concourse-repo
     - task: create-build-atrifacts
       config:
@@ -45,3 +58,6 @@ jobs:
       params:
         build: artifacts
         tag_file: tags/version
+      
+
+                  
