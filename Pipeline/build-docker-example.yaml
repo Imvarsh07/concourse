@@ -14,7 +14,7 @@ resources:
 - name: image-version 
   source:
     access_key_id: ((concourse-aws-access-key-id))
-    bucket: com.aqfer.dev.result-bucket
+    bucket: result-bucket
     driver: s3
     initial_version: 1.0.0
     key: tst/version 
