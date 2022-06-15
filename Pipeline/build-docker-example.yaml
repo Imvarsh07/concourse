@@ -28,7 +28,7 @@ jobs:
       params:
         bump: minor
       params:
-      file: image-version/version
+        file: image-version/version
     - put: image-version
     - get: concourse-repo
     - task: create-build-atrifacts
